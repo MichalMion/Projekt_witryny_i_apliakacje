@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sklep z Paczkami Kart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            text-align: center;
+            color: #333;
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .explanation {
+            font-size: 1.1em;
+            color: #555;
+            margin-top: 10px;
+        }
+        .explanation ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .paczka {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        hr{
+            border: none;
+        height: 2px;
+        background-color: rgb(204, 0, 255);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>QUIZ</h1>
+    </header>
+
+    <div class="section">
+        <h2>Cały kod strony quiz.html</h2>
+        <div class="explanation">
+            <pre class="code-block">
+                &lt;!DOCTYPE html&gt;
+&lt;html lang="pl"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Quiz&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .tlo-quiz {
+            background: #fff;
+            padding: 20px;
+            margin: auto;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .pytanie {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .Odpowiedzi {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .Odpowiedzi button {
+            padding: 10px;
+            background: #ffffff;
+            border: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .Odpowiedzi button.poprawna {
+            background: green;
+            color: white;
+        }
+        .Odpowiedzi button.niepoprawna {
+            background: red;
+            color: white;
+        }
+        .Odpowiedzi button.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .wynik {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: green;
+        }
+        #czas {
+            font-size: 1em;
+            margin-top: 10px;
+            color: red;
+        }
+        #animacjaPunktow, #animacjaPunktowm {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4em;
+            font-weight: bold;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.308);
+            padding: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            transition: opacity 0.5s ease-out;
+        }
+        #animacjaPunktow {
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00, 0 0 20px #00ff00;
+        }
+        #animacjaPunktowm {
+            color: #ff0000;
+            text-shadow: 0 0 20px #ff0000, 0 0 20px #ff0000;
+        }
+        #animacjaPunktow.visible, #animacjaPunktowm.visible {
+            opacity: 1;
+        }
+        #wyborIlosciPytan {
+            margin: 20px 0;
+        }
+        #iloscPytanLabel {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        #startowy {
+            background-color: green;
+            border: none;
+            padding: 20px;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #przejdzDoSklepu a{
+            border: none;
+            background-color: rgb(0, 81, 255);
+            padding: 20px;
+            border-radius: 20px;
+            color: #ffd;
+            font-weight: bold;
+            font-size: 15px;
+            text-decoration: none;
+        }
+        #koncowyguzik{
+            border: none;
+            background-color: rgb(0, 81, 255);
+            padding: 20px;
+            border-radius: 20px;
+            color: #ffd;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header style="height: 200px;"&gt;
+        &lt;h1 style="float: left;"&gt;Quizy i karty kolekcjonerskie- Michał Mionskowski&lt;/h1&gt;
+        &lt;a style="background-color: rgb(0, 81, 255);color: #fff;padding: 20px;border-radius: 20px;text-decoration: none;float: right;margin-right: 300px;" href="sklep.html"&gt;Sklep z kartami za punkty&lt;/a&gt;
+        &lt;p class="punkty" style="float: right;margin-right: -400px;"&gt;Twoje punkty: 0&lt;/p&gt;
+    &lt;/header&gt;
+    &lt;div class="tlo-quiz"&gt;
+        &lt;div id="startQuiz"&gt;
+            &lt;h2&gt;Witaj w quizie!&lt;/h2&gt;
+            &lt;div id="wyborIlosciPytan"&gt;
+                &lt;label for="iloscPytan"&gt;Wybierz liczbę pytań:&lt;/label&gt;
+                &lt;input type="range" id="iloscPytan" min="1" max="20" step="1" value="1" oninput="aktualizujLabel()"&gt;
+                &lt;div id="iloscPytanLabel"&gt;1 pytanie&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;button id="startowy" onclick="rozpocznijQuiz()"&gt;Rozpocznij Quiz&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div id="quiz" style="display: none;"&gt;
+            &lt;div class="pytanie" id="pytanie"&gt;Pytanie pojawi się tutaj&lt;/div&gt;
+            &lt;div id="czas"&gt;Pozostały czas: 60 sekund&lt;/div&gt;
+            &lt;div class="Odpowiedzi" id="Odpowiedzi"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="wynik" id="wynik" style="display: none;"&gt;
+            &lt;p&gt;Quiz zakończony! Twój wynik w tym quizie: &lt;span id="wynikLiczba"&gt;&lt;/span&gt;. Łącznie masz: &lt;span id="aktualnePunkty"&gt;&lt;/span&gt; punktów.&lt;/p&gt;
+            &lt;button id="koncowyguzik" onclick="location.reload()"&gt;Spróbuj ponownie&lt;/button&gt;
+            &lt;button id="koncowyguzik"onclick="window.location.href='sklep.html'"&gt;Sklep z kartami za punkty&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id="animacjaPunktow"&gt;&lt;/div&gt;
+    &lt;div id="animacjaPunktowm"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+const Pytania = [
+    { pytanie: "Co oznacza skrót 'CPU'?", Odpowiedzi: ["Central Processing Unit", "Computer Personal Unit", "Central Program Unit", "Central Processing Unit"], poprawna: 0 },
+    { pytanie: "Który język programowania jest uważany za jeden z najstarszych i najważniejszych języków komputerowych?", Odpowiedzi: ["Python", "C", "Java", "Assembly"], poprawna: 1 },
+    { pytanie: "Co to jest system operacyjny?", Odpowiedzi: ["Program służący do edytowania tekstu", "Program do zarządzania sprzętem i oprogramowaniem", "Typ języka programowania", "Narzędzie do tworzenia baz danych"], poprawna: 1 },
+    { pytanie: "Który z poniższych języków jest językiem skryptowym?", Odpowiedzi: ["C++", "JavaScript", "Python", "Java"], poprawna: 1 },
+    { pytanie: "Czym jest algorytm?", Odpowiedzi: ["Zbiorem danych", "Zbiorem poleceń rozwiązywujących określony problem", "Typem pamięci komputerowej", "Procesem zarządzania pamięcią w komputerze"], poprawna: 1 },
+    { pytanie: "Co to jest 'RAM'?", Odpowiedzi: ["Pamięć o dostępie losowym", "Procesor komputerowy", "Karta graficzna", "System operacyjny"], poprawna: 0 },
+    { pytanie: "Który z poniższych języków jest językiem obiektowym?", Odpowiedzi: ["HTML", "Java", "PHP", "CSS"], poprawna: 1 },
+    { pytanie: "Czym jest 'debugowanie'?", Odpowiedzi: ["Procesem tworzenia nowych funkcji w programie", "Procesem usuwania błędów z programu", "Procesem kompilowania programu", "Procesem tworzenia interfejsu użytkownika"], poprawna: 1 },
+    { pytanie: "Co to jest 'Git'?", Odpowiedzi: ["Język programowania", "Narzędzie do tworzenia baz danych", "System kontroli wersji", "System operacyjny"], poprawna: 2 },
+    { pytanie: "Jak nazywa się technologia umożliwiająca tworzenie stron internetowych?", Odpowiedzi: ["SQL", "HTML", "JavaScript", "CSS"], poprawna: 1 },
+    { pytanie: "Co oznacza skrót 'URL'?", Odpowiedzi: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Real Locator", "Universal Real Locator"], poprawna: 0 },
+    { pytanie: "Co to jest 'kompilator'?", Odpowiedzi: ["Program do przetwarzania danych", "Program tłumaczący kod źródłowy na kod maszynowy", "Typ bazy danych", "Typ systemu operacyjnego"], poprawna: 1 },
+    { pytanie: "Który z poniższych systemów operacyjnych jest otwartoźródłowy?", Odpowiedzi: ["Windows", "macOS", "Linux", "Android"], poprawna: 2 },
+    { pytanie: "Co to jest 'chmura obliczeniowa'?", Odpowiedzi: ["Przechowywanie danych na serwerze internetowym", "Rodzaj systemu operacyjnego", "Typ pamięci w komputerze", "Nowy typ procesora"], poprawna: 0 },
+    { pytanie: "Co oznacza skrót 'HTML'?", Odpowiedzi: ["HyperText Machine Language", "HyperText Markup Language", "HyperText Modelling Language", "HyperTool Markup Language"], poprawna: 1 },
+    { pytanie: "Czym jest 'JavaScript'?", Odpowiedzi: ["Językiem programowania do tworzenia stron internetowych", "Językiem programowania stosowanym w analizie danych", "Językiem używanym do obliczeń naukowych", "Typem systemu operacyjnego"], poprawna: 0 },
+    { pytanie: "Co to jest 'API'?", Odpowiedzi: ["Narzędzie do tworzenia baz danych", "Interfejs do komunikacji między aplikacjami", "Procesor komputerowy", "Typ pamięci w komputerze"], poprawna: 1 },
+    { pytanie: "Które z poniższych jest przykładem języka deklaratywnego?", Odpowiedzi: ["Java", "Python", "SQL", "C++"], poprawna: 2 },
+    { pytanie: "Co to jest 'blockchain'?", Odpowiedzi: ["Typ systemu operacyjnego", "Technologia do przechowywania danych w sposób rozproszony", "Narzędzie do edycji tekstu", "Typ algorytmu sortowania"], poprawna: 1 },
+    { pytanie: "Co oznacza skrót 'SSD'?", Odpowiedzi: ["Solid State Drive", "Standard Storage Device", "System Storage Disk", "Simple Storage Disk"], poprawna: 0 }
+];
+
+
+        let wybranePytania = [];
+        let aktualnepytanie = 0;
+        let wynik = 0;
+        let aktualnePunkty = parseInt(localStorage.getItem('wynik')) || 0;
+        let czasPozostaly = 60;
+        let przedzialCzasu;
+
+        const iloscPytanInput = document.getElementById('iloscPytan');
+        const iloscPytanLabel = document.getElementById('iloscPytanLabel');
+        const startQuizEl = document.getElementById('startQuiz');
+        const quizEl = document.getElementById('quiz');
+        const pytanieEl = document.getElementById('pytanie');
+        const OdpowiedziEl = document.getElementById('Odpowiedzi');
+        const wynikEl = document.getElementById('wynik');
+        const czasEl = document.getElementById('czas');
+        const animacjaPunktow = document.getElementById('animacjaPunktow');
+        const animacjaPunktowm = document.getElementById('animacjaPunktowm');
+
+        function aktualizujLabel() {
+            const ilosc = iloscPytanInput.value;
+            iloscPytanLabel.textContent = `${ilosc} ${ilosc === "1" ? "pytanie" : "pytania"}`;
+        }
+
+        function aktualizujWyswietlaniePunktow() {
+            document.querySelector('.punkty').textContent = `Twoje punkty: ${aktualnePunkty}`;
+        }
+
+        aktualizujWyswietlaniePunktow();
+
+        function rozpocznijQuiz() {
+            const iloscPytan = parseInt(iloscPytanInput.value);
+            wybranePytania = Pytania.slice(0, iloscPytan);
+            startQuizEl.style.display = 'none';
+            quizEl.style.display = 'block';
+            pokazpytanie();
+        }
+
+        function pokazpytanie() {
+            const q = wybranePytania[aktualnepytanie];
+            pytanieEl.textContent = q.pytanie;
+            OdpowiedziEl.innerHTML = '';
+            czasPozostaly = 60;
+            czasEl.textContent = `Pozostały czas: ${czasPozostaly} sekund`;
+
+            q.Odpowiedzi.forEach((odpowiedz, index) =&gt; {
+                const button = document.createElement('button');
+                button.textContent = odpowiedz;
+                button.onclick = () =&gt; sprawdzOdpowiedz(index);
+                OdpowiedziEl.appendChild(button);
+            });
+
+            startczas();
+        }
+
+        function sprawdzOdpowiedz(zaznaczona) {
+            const buttons = OdpowiedziEl.querySelectorAll('button');
+            const poprawnaOK = wybranePytania[aktualnepytanie].poprawna;
+            clearInterval(przedzialCzasu);
+
+            buttons.forEach((button, index) =&gt; {
+                button.disabled = true;
+                if (index === poprawnaOK) button.classList.add('poprawna');
+                else if (index === zaznaczona) button.classList.add('niepoprawna');
+            });
+
+            const punkty = zaznaczona === poprawnaOK ? 100 - (60-czasPozostaly) : 0;
+            wynik += punkty;
+            aktualnePunkty += punkty;
+
+            localStorage.setItem('wynik', aktualnePunkty);
+            aktualizujWyswietlaniePunktow();
+
+            const animacja = zaznaczona === poprawnaOK ? animacjaPunktow : animacjaPunktowm;
+            animacja.textContent = `+${punkty}`;
+            animacja.classList.add('visible');
+            setTimeout(() =&gt; animacja.classList.remove('visible'), 2000);
+
+            setTimeout(() =&gt; {
+                aktualnepytanie++;
+                if (aktualnepytanie &lt; wybranePytania.length) {
+                    pokazpytanie();
+                } else {
+                    pokazwynikKoncowy();
+                }
+            }, 2000);
+        }
+
+function pokazwynikKoncowy() {
+    pytanieEl.style.display = 'none';
+    OdpowiedziEl.style.display = 'none';
+    czasEl.style.display = 'none';
+    wynikEl.style.display = 'block';
+
+
+    document.getElementById('wynikLiczba').textContent = wynik;
+    document.getElementById('aktualnePunkty').textContent = aktualnePunkty;
+
+}
+
+        function startczas() {
+            clearInterval(przedzialCzasu);
+            przedzialCzasu = setInterval(() =&gt; {
+                czasPozostaly--;
+                czasEl.textContent = `Pozostały czas: ${czasPozostaly} sekund`;
+                if (czasPozostaly &lt;= 0) {
+                    clearInterval(przedzialCzasu);
+                    sprawdzOdpowiedz(-1);
+                }
+            }, 1000);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Szczególowe omówienie JS</h2>
+        <div class="explanation">
+            <p>Ten kod definiuje tablicę Pytania, która przechowuje treść pytania, możliwe odpowiedzi i numer poprawną odpowiedzi.</p>
+            <pre class="code-block">
+                const Pytania = [
+                { pytanie: "Co oznacza skrót 'CPU'?", Odpowiedzi: ["Central Processing Unit", "Computer Personal Unit", "Central Program Unit", "Central Processing Unit"], poprawna: 0 },
+                { pytanie: "Który język programowania jest uważany za jeden z najstarszych i najważniejszych języków komputerowych?", Odpowiedzi: ["Python", "C", "Java", "Assembly"], poprawna: 1 },
+                { pytanie: "Co to jest system operacyjny?", Odpowiedzi: ["Program służący do edytowania tekstu", "Program do zarządzania sprzętem i oprogramowaniem", "Typ języka programowania", "Narzędzie do tworzenia baz danych"], poprawna: 1 },
+                { pytanie: "Który z poniższych języków jest językiem skryptowym?", Odpowiedzi: ["C++", "JavaScript", "Python", "Java"], poprawna: 1 },
+                { pytanie: "Czym jest algorytm?", Odpowiedzi: ["Zbiorem danych", "Zbiorem poleceń rozwiązywujących określony problem", "Typem pamięci komputerowej", "Procesem zarządzania pamięcią w komputerze"], poprawna: 1 },
+                { pytanie: "Co to jest 'RAM'?", Odpowiedzi: ["Pamięć o dostępie losowym", "Procesor komputerowy", "Karta graficzna", "System operacyjny"], poprawna: 0 },
+                { pytanie: "Który z poniższych języków jest językiem obiektowym?", Odpowiedzi: ["HTML", "Java", "PHP", "CSS"], poprawna: 1 },
+                { pytanie: "Czym jest 'debugowanie'?", Odpowiedzi: ["Procesem tworzenia nowych funkcji w programie", "Procesem usuwania błędów z programu", "Procesem kompilowania programu", "Procesem tworzenia interfejsu użytkownika"], poprawna: 1 },
+                { pytanie: "Co to jest 'Git'?", Odpowiedzi: ["Język programowania", "Narzędzie do tworzenia baz danych", "System kontroli wersji", "System operacyjny"], poprawna: 2 },
+                { pytanie: "Jak nazywa się technologia umożliwiająca tworzenie stron internetowych?", Odpowiedzi: ["SQL", "HTML", "JavaScript", "CSS"], poprawna: 1 },
+                { pytanie: "Co oznacza skrót 'URL'?", Odpowiedzi: ["Uniform Resource Locator", "Universal Resource Locator", "Uniform Real Locator", "Universal Real Locator"], poprawna: 0 },
+                { pytanie: "Co to jest 'kompilator'?", Odpowiedzi: ["Program do przetwarzania danych", "Program tłumaczący kod źródłowy na kod maszynowy", "Typ bazy danych", "Typ systemu operacyjnego"], poprawna: 1 },
+                { pytanie: "Który z poniższych systemów operacyjnych jest otwartoźródłowy?", Odpowiedzi: ["Windows", "macOS", "Linux", "Android"], poprawna: 2 },
+                { pytanie: "Co to jest 'chmura obliczeniowa'?", Odpowiedzi: ["Przechowywanie danych na serwerze internetowym", "Rodzaj systemu operacyjnego", "Typ pamięci w komputerze", "Nowy typ procesora"], poprawna: 0 },
+                { pytanie: "Co oznacza skrót 'HTML'?", Odpowiedzi: ["HyperText Machine Language", "HyperText Markup Language", "HyperText Modelling Language", "HyperTool Markup Language"], poprawna: 1 },
+                { pytanie: "Czym jest 'JavaScript'?", Odpowiedzi: ["Językiem programowania do tworzenia stron internetowych", "Językiem programowania stosowanym w analizie danych", "Językiem używanym do obliczeń naukowych", "Typem systemu operacyjnego"], poprawna: 0 },
+                { pytanie: "Co to jest 'API'?", Odpowiedzi: ["Narzędzie do tworzenia baz danych", "Interfejs do komunikacji między aplikacjami", "Procesor komputerowy", "Typ pamięci w komputerze"], poprawna: 1 },
+                { pytanie: "Które z poniższych jest przykładem języka deklaratywnego?", Odpowiedzi: ["Java", "Python", "SQL", "C++"], poprawna: 2 },
+                { pytanie: "Co to jest 'blockchain'?", Odpowiedzi: ["Typ systemu operacyjnego", "Technologia do przechowywania danych w sposób rozproszony", "Narzędzie do edycji tekstu", "Typ algorytmu sortowania"], poprawna: 1 },
+                { pytanie: "Co oznacza skrót 'SSD'?", Odpowiedzi: ["Solid State Drive", "Standard Storage Device", "System Storage Disk", "Simple Storage Disk"], poprawna: 0 }
+            ];
+            </pre>
+            <hr>
+            <p>
+                definiuję tutaj zmienne oraz elementy które przydzą się do późniejszej pracy
+            </p>
+            <pre class="code-block">
+                let wybranePytania = [];
+                let aktualnepytanie = 0;
+                let wynik = 0;
+                let aktualnePunkty = parseInt(localStorage.getItem('wynik')) || 0;
+                let czasPozostaly = 60;
+                let przedzialCzasu;
+        
+                const iloscPytanInput = document.getElementById('iloscPytan');
+                const iloscPytanLabel = document.getElementById('iloscPytanLabel');
+                const startQuizEl = document.getElementById('startQuiz');
+                const quizEl = document.getElementById('quiz');
+                const pytanieEl = document.getElementById('pytanie');
+                const OdpowiedziEl = document.getElementById('Odpowiedzi');
+                const wynikEl = document.getElementById('wynik');
+                const czasEl = document.getElementById('czas');
+                const animacjaPunktow = document.getElementById('animacjaPunktow');
+                const animacjaPunktowm = document.getElementById('animacjaPunktowm');
+        </pre><hr>
+        <p> Funkcja poniżej pokaazuje ilosc pytan ktora uzytkownik wybiera za pomocą suwaka</p>
+        <pre class="code-block">
+            function aktualizujLabel() {
+                const ilosc = iloscPytanInput.value;
+                iloscPytanLabel.textContent = `${ilosc} ${ilosc === "1" ? "pytanie" : "pytania"}`;
+            }
+    </pre>
+    <hr>
+    <p>Funkcja poniżej aktualizuje ilosc wyswietlanyych punkktów na stronie</p>
+    <pre class="code-block">
+        function aktualizujWyswietlaniePunktow() {
+            document.querySelector('.punkty').textContent = `Twoje punkty: ${aktualnePunkty}`;
+        }
+        aktualizujWyswietlaniePunktow();
+    </pre>
+    <hr>
+    <p>funkcja rozpoczyna quiz z ilością pytań które użytkownik wybrał i je wyświetla za pomocą wywołania funkcji pokazpytanie  </p>
+    <pre class="code-block">
+        function rozpocznijQuiz() {
+            const iloscPytan = parseInt(iloscPytanInput.value);
+            wybranePytania = Pytania.slice(0, iloscPytan);
+            startQuizEl.style.display = 'none';
+            quizEl.style.display = 'block';
+            pokazpytanie();
+        }
+</pre>
+<hr>
+<p>funkcja po uruchomieniu quizu Wyświetla treść aktualnego pytania, tworzy przyciski dla wszystkich odpowiedzi i przypisuje im odpowiednie akcje po kliknięciu, rozpoczyna odliczanie czasu.</p>
+<pre class="code-block">
+    function pokazpytanie() {
+        const q = wybranePytania[aktualnepytanie];
+        pytanieEl.textContent = q.pytanie;
+        OdpowiedziEl.innerHTML = '';
+        czasPozostaly = 60;
+        czasEl.textContent = `Pozostały czas: ${czasPozostaly} sekund`;
+
+        q.Odpowiedzi.forEach((odpowiedz, index) => {
+            const button = document.createElement('button');
+            button.textContent = odpowiedz;
+            button.onclick = () => sprawdzOdpowiedz(index);
+            OdpowiedziEl.appendChild(button);
+        });
+
+        startczas();
+    }
+</pre>
+<hr>
+    <p> funkcja sprawdza czy zaznaczona odpowiedz byla poprawna, następnie ją podświetla poprawną i ewentualnie nie poprawną odpowiedź, potem przyznaje punkty za poprawną odpowiedź, następnie wyświetla animacje przyznania punktów i przechodzi do następnego pytania bądź jeżeli już niema pytań kończy quiz</p>
+    <pre class="code-block">
+        function sprawdzOdpowiedz(zaznaczona) {
+            const buttons = OdpowiedziEl.querySelectorAll('button');
+            const poprawnaOK = wybranePytania[aktualnepytanie].poprawna;
+            clearInterval(przedzialCzasu);
+
+            buttons.forEach((button, index) => {
+                button.disabled = true;
+                if (index === poprawnaOK) button.classList.add('poprawna');
+                else if (index === zaznaczona) button.classList.add('niepoprawna');
+            });
+
+            const punkty = zaznaczona === poprawnaOK ? 100 - (60-czasPozostaly) : 0;
+            wynik += punkty;
+            aktualnePunkty += punkty;
+
+            localStorage.setItem('wynik', aktualnePunkty);
+            aktualizujWyswietlaniePunktow();
+
+            const animacja = zaznaczona === poprawnaOK ? animacjaPunktow : animacjaPunktowm;
+            animacja.textContent = `+${punkty}`;
+            animacja.classList.add('visible');
+            setTimeout(() => animacja.classList.remove('visible'), 2000);
+
+            setTimeout(() => {
+                aktualnepytanie++;
+                if (aktualnepytanie < wybranePytania.length) {
+                    pokazpytanie();
+                } else {
+                    pokazwynikKoncowy();
+                }
+            }, 2000);
+        }
+    </pre>
+    <hr>
+    <p>funkcja odpowiada za wyswietlenie widoku po zakonczeniu quizu, ukrywa pytania i odpowiedzi.Przedstawia ilosc punktow zdobytych w tym quizie oraz ogólną ilość punktów</p>
+    <pre class="code-block">
+        function pokazwynikKoncowy() {
+            pytanieEl.style.display = 'none';
+            OdpowiedziEl.style.display = 'none';
+            czasEl.style.display = 'none';
+            wynikEl.style.display = 'block';
+        
+        
+            document.getElementById('wynikLiczba').textContent = wynik;
+            document.getElementById('aktualnePunkty').textContent = aktualnePunkty;
+        
+        }
+    </pre>
+    <hr>
+    <p>funkcja  odpowiada za uruchomienie i zarządzanie czasem. funkcja odlicza czas i wyswietla go na ekranie co sekundę a jeżeli czas się skonczy uznaje odpowiedz na pytanie za nieprawidlowa, w momencie gdy przejdziemy do kolejnego pytania licznik czasu jest resetowany</p>
+    <pre class="code-block">
+        function startczas() {
+            clearInterval(przedzialCzasu);
+            przedzialCzasu = setInterval(() => {
+                czasPozostaly--;
+                czasEl.textContent = `Pozostały czas: ${czasPozostaly} sekund`;
+                if (czasPozostaly <= 0) {
+                    clearInterval(przedzialCzasu);
+                    sprawdzOdpowiedz(-1);
+                }
+            }, 1000);
+        }
+    </pre>
+</div>
+</div>
+
+    <div class="section">
+       
+    </div>
+    
+</body>
+</html>

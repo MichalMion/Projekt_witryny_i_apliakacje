@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sklep z Paczkami Kart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            text-align: center;
+            color: #333;
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .explanation {
+            font-size: 1.1em;
+            color: #555;
+            margin-top: 10px;
+        }
+        .explanation ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .paczka {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        hr{
+            border: none;
+        height: 2px;
+        background-color: rgb(204, 0, 255);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sklep z Paczkami Kart</h1>
+    </header>
+
+    <div class="section">
+        <h2>Cały kod strony sklep.html</h2>
+        <div class="explanation">
+            <pre class="code-block">
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="pl"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title&gt;Sklep z Paczkami Kart&lt;/title&gt;
+                    &lt;style&gt;
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f9;
+                            margin: 0;
+                            padding: 20px;
+                            text-align: center;
+                        }
+                        .tlo-sklep {
+                            background: #fff;
+                            padding: 20px;
+                            margin: auto;
+                            width: 100%;
+                            max-width: 500px;
+                            border-radius: 8px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        }
+                        .paczka {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin: 15px 0;
+                            padding: 10px;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+                            background: #f9f9f9;
+                        }
+                        .paczka h3 {
+                            margin: 0;
+                            font-size: 1.2em;
+                        }
+                        .paczka button {
+                            padding: 10px 20px;
+                            background: green;
+                            color: white;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            transition: background 0.3s;
+                        }
+                        .paczka button:hover {
+                            background: darkgreen;
+                        }
+                        #komunikat {
+                            font-size: 1.2em;
+                            margin-top: 20px;
+                        }
+                        #animacjaGif {
+                            position: fixed;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            display: none;
+                            z-index: 1000;
+                            background-color: #0000007e;
+                            padding: 100%;
+                        }
+                        .karta {
+                            margin: 20px auto;
+                            position: fixed;
+                            padding: 10px;
+                            border: 2px dashed #888;
+                            border-radius: 8px;
+                            max-width: 300px;
+                            background: #f4f4f9;
+                            font-size: 1.2em;
+                            text-align: center;
+                            z-index: 1000;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                        .karta img {
+                            max-width: 100%;
+                            border-radius: 8px;
+                            
+                        }
+                        #ekwipunek {
+                            margin-top: 30px;
+                            text-align: center;
+                        }
+                        #ekwipunek h2 {
+                            font-size: 1.5em;
+                            color: #444;
+                        }
+                        .ekwipunek-lista {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 15px;
+                            justify-content: center;
+                            margin-top: 20px;
+                        }
+                        .ekwipunek-item {
+                            border: 2px dashed #000000;
+                            border-radius: 8px;
+                            padding: 10px;
+                            width: 200px;
+                            background: #fff;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                            text-align: center;
+                            position: relative;
+                        }
+                        .ekwipunek-item img {
+                            max-width: 100%;
+                            border-radius: 5px;
+                        }
+                        .ekwipunek-item h4 {
+                            margin: 10px 0 5px;
+                            font-size: 1em;
+                            color: #333;
+                        }
+                        .ekwipunek-item p {
+                            font-size: 0.9em;
+                            color: #666;
+                            margin-bottom: 10px;
+                        }
+                        .ekwipunek-item button {
+                            padding: 5px 10px;
+                            background: red;
+                            color: white;
+                            border: none;
+                            border-radius: 5px;
+                            font-size: 0.9em;
+                            cursor: pointer;
+                        }
+                        .ekwipunek-item button:hover {
+                            background: darkred;
+                        }
+                    &lt;/style&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    &lt;header style="margin-bottom: 100px;"&gt;
+                        &lt;h1 style="float: left;"&gt;Quizy i karty kolekcjonerskie- Michał Mionskowski&lt;/h1&gt;
+                            
+                        &lt;a style="background-color: rgb(0, 81, 255);color: #fff;padding: 20px;border-radius: 20px;text-decoration: none;float: right;margin-right: 200px;" href="quiz.html"&gt;Quiz&lt;/a&gt;
+                        &lt;p class="punkty" style="float: right;margin-right: -250px;"&gt;Twoje punkty: 0&lt;/p&gt;
+                    &lt;/header&gt;
+                    &lt;div class="tlo-sklep"&gt;
+                        &lt;div class="paczka"&gt;
+                            &lt;h3&gt;Paczka z Zwierzętami (300 pkt)&lt;/h3&gt;
+                            &lt;button onclick="kupPaczke(300, zwykleKarty)"&gt;Kup&lt;/button&gt;
+                        &lt;/div&gt;
+                        &lt;div class="paczka"&gt;
+                            &lt;h3&gt;Paczka z autami (800 pkt)&lt;/h3&gt;
+                            &lt;button onclick="kupPaczke(800, epickieKarty)"&gt;Kup&lt;/button&gt;
+                        &lt;/div&gt;
+                        &lt;div class="paczka"&gt;
+                            &lt;h3&gt;Paczka z piłkarzami (1500 pkt)&lt;/h3&gt;
+                            &lt;button onclick="kupPaczke(1500, legendarneKarty)"&gt;Kup&lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div id="animacjaGif"&gt;
+                        &lt;img src="box.gif" alt="Otwieranie paczki"&gt;
+                    &lt;/div&gt;
+                    &lt;div id="prezentacjaKarty" style="display: none;"&gt;
+                        &lt;div class="karta"&gt;
+                            &lt;img id="prezentacjaObrazek" src="" alt="Wylosowana Karta"&gt;
+                            &lt;h4 id="prezentacjaNazwa"&gt;&lt;/h4&gt;
+                            &lt;p id="prezentacjaOpis"&gt;&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div id="komunikat"&gt;&lt;/div&gt;
+                    &lt;div id="ekwipunek"&gt;
+                        &lt;h2&gt;Twój Ekwipunek:&lt;/h2&gt;
+                        &lt;div class="ekwipunek-lista" id="listaEkwipunku"&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;a href="quiz.html" style="display: block; margin-top: 20px; text-decoration: none; font-size: 1.2em; color: blue;"&gt;Wróć do Quizu&lt;/a&gt;
+                
+                    
+                    
+                    &lt;script&gt;
+                        const zwykleKarty = [
+                            { nazwa: 'Żyrafa', opis: 'rodzaj ssaków z rodziny żyrafowatych. Rodzaj obejmuje gatunki występujące w Afryce.', cena: 75, obrazek: 'https://th.bing.com/th/id/OIP.LNAXsKS8ROi6JpxIeUz0PgHaHa?w=190&h=190&c=7&r=0&o=5&pid=1.7' },
+                            { nazwa: 'Panda Wielka', opis: 'niedźwiedź bambusowy (Ailuropoda melanoleuca) – gatunek drapieżnego ssaka z rodziny niedźwiedziowatych (Ursidae).', cena: 75, obrazek: 'https://th.bing.com/th/id/OIP.56jojgyh2w2l_hh7z8y60AHaHa?w=194&h=188&c=7&r=0&o=5&pid=1.7' },
+                            { nazwa: 'Kapibara', opis: 'największy żyjący współcześnie gatunek gryzonia z rodziny kawiowatych. Niektórzy autorzy umieszczają kapibarę wielką w monotypowej rodzinie kapibar.', cena: 75, obrazek: 'https://th.bing.com/th/id/OIP.dkDkdIVr06Q1MHNltP28rQHaGO?w=212&h=180&c=7&r=0&o=5&pid=1.7' },
+                            { nazwa: 'Miśka', opis: 'Miśka lubi jabłko, lubi chipsa, czekoladke, babke, babke taką lubi co ci kupuję lubi, banana lubiła Miśka', cena: 75, obrazek: 'https://cdn.discordapp.com/attachments/928309947475841134/1312809351710380152/image.png?ex=674dd87c&is=674c86fc&hm=3eb8b4915ec150169a2aacff90bc62c4d0eed0631c9d3eb8e09d485181bb8fab&' }
+                        ];
+                        const epickieKarty = [
+                            { nazwa: 'Ursus C-330', opis: 'lekki ciągnik rolniczy produkowany w latach 1967–1987 przez zakłady mechaniczne Ursus w Warszawie.', cena: 200, obrazek: 'https://th.bing.com/th/id/OIP.kP5zam0dgx1_QkQuv2wCHgHaFj?rs=1&pid=ImgDetMain' },
+                            { nazwa: 'Fiat Multipla', opis: 'samochód osobowy typu minivan klasy kompaktowej produkowany przez włoską markę FIAT w latach 1998–2010.', cena: 200, obrazek: 'https://th.bing.com/th/id/R.a2538980e6eb6dffc545373cbc5eeb7b?rik=C6IXYJhtF5ccjw&riu=http%3a%2f%2fwww.carsbase.com%2fphoto%2fFiat-Multipla_mp21_pic_35082.jpg&ehk=iNo%2bf%2bpfMzsAIKc5zHvjXC%2bBQkwBW87%2be8282z%2fyVVc%3d&risl=&pid=ImgRaw&r=0' },
+                            { nazwa: 'Mercedes-Benz klasy G', opis: ' samochód osobowo-terenowy, a następnie SUV klasy wyższej produkowany pod niemiecką marką Mercedes-Benz od 1979 roku.', cena: 200, obrazek: 'https://th.bing.com/th/id/OIP.7slBGsTX7bE4JmTKo9f4_wHaEK?rs=1&pid=ImgDetMain' },
+                            { nazwa: 'Furgonetka z napisem "FREE CANDY"', opis: 'Całkowicie nie podejrzany pojazd z napisem darmowe cukierki. Porusza się on po mięscie i zaprasza dzieci do środka aby odebrały swoje cukierki', cena: 200, obrazek: 'https://media.boingboing.net/wp-content/uploads/2015/08/free-candy.jpg' },
+                            { nazwa: 'Porshe 911 GT3 RS', opis: 'kolejny model typu 911. Pierwsza wersja GT3 wyszła w roku 1999. Wygląd zewnętrzny nie odbiega zbytnio od innych modeli. Model ten wyposażony jest w 6-cylindrowy silnik bokser o pojemności 3600 cm³.', cena: 200, obrazek: 'https://th.bing.com/th/id/OIP.lDdBK9YfdfPjc6CZvDprOQHaEo?rs=1&pid=ImgDetMain' }
+                        ];
+                        const legendarneKarty = [
+                            { nazwa: 'Robert Lewandowski', opis: 'polski piłkarz, występujący na pozycji środkowego napastnika w hiszpańskim klubie FC Barcelona oraz w reprezentacji Polski, której jest kapitanem.', cena: 375, obrazek: 'https://www.bing.com/th?id=OIP.MO6o7Z13hGxeoCwLbiy-EgHaEv&w=202&h=200&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2' },
+                            { nazwa: 'Kylian Mbappé', opis: 'francuski piłkarz kameruńsko-algierskiego pochodzenia, występujący na pozycji napastnika w hiszpańskim klubie Real Madryt oraz w reprezentacji Francji, której jest kapitanem.', cena: 375, obrazek: 'https://th.bing.com/th/id/OIP.8jKygDqUQ6ifBIsAoC0iTgHaE8?rs=1&pid=ImgDetMain' },
+                            { nazwa: 'Cristiano Ronaldo', opis: ' portugalski piłkarz, występujący na pozycji napastnika w saudyjskim klubie Al-Nassr oraz w reprezentacji Portugalii, której jest kapitanem. Złoty medalista Mistrzostw Europy 2016, srebrny medalista Mistrzostw Europy 2004.', cena: 375, obrazek: 'https://th.bing.com/th?id=OSK.vAVgNtmxfd8YO0kEZHIT1A&w=224&h=200&c=7&rs=1&o=6&pid=SANGAM' },
+                            { nazwa: 'Lamine Yamal', opis: 'hiszpański piłkarz pochodzenia marokańsko-gwinejskiego, występujący na pozycji napastnika w hiszpańskim klubie FC Barcelona oraz w reprezentacji Hiszpanii. Zwycięzca Mistrzostw Europy 2024. Zwycięzca Nagrody Kopa Trophy 2024.', cena: 375, obrazek: 'https://th.bing.com/th?id=OSK.sMZGrTyR6-kqn2Qtgaem11GDm4sqfu9Rytf3Tms93KU&w=224&h=200&c=7&rs=1&o=6&pid=SANGAM' }
+                        ];
+                
+                        function aktualizujPunkty() {
+                            const punkty = localStorage.getItem('wynik') || 0;
+                            document.querySelector('.punkty').textContent = `Twoje punkty: ${punkty}`;
+                        }
+                
+                        function aktualizujEkwipunek() {
+                            const ekwipunek = JSON.parse(localStorage.getItem('ekwipunek')) || [];
+                            const lista = document.getElementById('listaEkwipunku');
+                            lista.innerHTML = '';
+                            ekwipunek.forEach((karta, index) =&gt; {
+                                const div = document.createElement('div');
+                                div.className = 'ekwipunek-item';
+                                div.innerHTML = `
+                                    &lt;img src="${karta.obrazek}" alt="${karta.nazwa}"&gt;
+                                    &lt;h4&gt;${karta.nazwa}&lt;/h4&gt;
+                                    &lt;p&gt;${karta.opis}&lt;/p&gt;
+                                    &lt;button onclick="sprzedajKarte(${index}, ${karta.cena})"&gt;Sprzedaj (${karta.cena} pkt)&lt;/button&gt;
+                                `;
+                                lista.appendChild(div);
+                            });
+                        }
+                
+                        function kupPaczke(cena, karty) {
+                    let punkty = parseInt(localStorage.getItem('wynik')) || 0;
+                    const animacjaGif = document.getElementById('animacjaGif');
+                    const prezentacjaKarty = document.getElementById('prezentacjaKarty');
+                    const prezentacjaObrazek = document.getElementById('prezentacjaObrazek');
+                    const prezentacjaNazwa = document.getElementById('prezentacjaNazwa');
+                    const prezentacjaOpis = document.getElementById('prezentacjaOpis');
+                
+                    if (punkty &gt;= cena) {
+                        punkty -= cena;
+                        localStorage.setItem('wynik', punkty);
+                
+                        animacjaGif.style.display = 'block';
+                
+                        setTimeout(() =&gt; {
+                            animacjaGif.style.display = 'none';
+                            const wylosowanaKarta = karty[Math.floor(Math.random() * karty.length)];
+                            prezentacjaObrazek.src = wylosowanaKarta.obrazek;
+                            prezentacjaNazwa.textContent = wylosowanaKarta.nazwa;
+                            prezentacjaOpis.textContent = wylosowanaKarta.opis;
+                            prezentacjaKarty.style.display = 'block';
+                
+                            setTimeout(() =&gt; {
+                                prezentacjaKarty.style.display = 'none';
+                                const ekwipunek = JSON.parse(localStorage.getItem('ekwipunek')) || [];
+                                ekwipunek.push(wylosowanaKarta);
+                                localStorage.setItem('ekwipunek', JSON.stringify(ekwipunek));
+                                aktualizujPunkty();
+                                aktualizujEkwipunek();
+                            }, 3000); 
+                        }, 2000); 
+                    } else {
+                        komunikat.textContent = 'Nie masz wystarczającej liczby punktów!';
+                        komunikat.style.color = 'red';
+                    }
+                }
+                
+                
+                        function sprzedajKarte(index, cena) {
+                            let punkty = parseInt(localStorage.getItem('wynik')) || 0;
+                            const ekwipunek = JSON.parse(localStorage.getItem('ekwipunek')) || [];
+                            ekwipunek.splice(index, 1);
+                            localStorage.setItem('ekwipunek', JSON.stringify(ekwipunek));
+                            localStorage.setItem('wynik', punkty + cena);
+                            aktualizujPunkty();
+                            aktualizujEkwipunek();
+                        }
+                
+                        aktualizujPunkty();
+                        aktualizujEkwipunek();
+                    &lt;/script&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+                
+            </pre>
+            <hr>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Szczególowe omówienie JS</h2>
+        <div class="explanation">
+            <p> po kliknięci przycisku wywołuje się funkcja kupPaczke i przesyłane są do niej wartości o kwocie którą trzea zapłacić oraz rodzaj paczki</p>
+            <pre class="code-block">
+ &lt;button onclick="kupPaczke(300, zwykleKarty)"&gt;Kup&lt;/button&gt;
+            </pre>
+            <hr>
+            <p>
+                Mój kod rozpocząłem od zdefiniowania trzech tablic, które przechowują dane na temat kart znajdujących się w paczkach kart. Każda tablica zawiera obiekty reprezentujące poszczególne karty, a każda karta zawiera informacje o nazwie, opisie, cenie sprzedarzy oraz obrazku.
+            </p>
+            <pre class="code-block">
+                const zwykleKarty = [
+            { nazwa: 'Żyrafa', opis: 'rodzaj ssaków z rodziny żyrafowatych. Rodzaj obejmuje gatunki występujące w Afryce.', cena: 75, obrazek: 'https://th.bing.com/th/id/OIP.LNAXsKS8ROi6JpxIeUz0PgHaHa?w=190&h=190&c=7&r=0&o=5&pid=1.7' },
+            { nazwa: 'Panda Wielka', opis: 'niedźwiedź bambusowy (Ailuropoda melanoleuca) – gatunek drapieżnego ssaka z rodziny niedźwiedziowatych (Ursidae).', cena: 75, obrazek: 'https://th.bing.com/th/id/OIP.56jojgyh2w2l_hh7z8y60AHaHa?w=194&h=188&c=7&r=0&o=5&pid=1.7' },
+            { nazwa: 'Kapibara', opis: 'największy żyjący współcześnie gatunek gryzonia z rodziny kawiowatych. Niektórzy autorzy umieszczają kapibarę wielką w monotypowej rodzinie kapibar.', cena: 75, obrazek: 'https://th.bing.com/th/id/OIP.dkDkdIVr06Q1MHNltP28rQHaGO?w=212&h=180&c=7&r=0&o=5&pid=1.7' },
+            { nazwa: 'Miśka', opis: 'Miśka lubi jabłko, lubi chipsa, czekoladke, babke, babke taką lubi co ci kupuję lubi, banana lubiła Miśka', cena: 75, obrazek: 'https://cdn.discordapp.com/attachments/928309947475841134/1312809351710380152/image.png?ex=674dd87c&is=674c86fc&hm=3eb8b4915ec150169a2aacff90bc62c4d0eed0631c9d3eb8e09d485181bb8fab&' }
+        ];
+        const epickieKarty = [
+            { nazwa: 'Ursus C-330', opis: 'lekki ciągnik rolniczy produkowany w latach 1967–1987 przez zakłady mechaniczne Ursus w Warszawie.', cena: 200, obrazek: 'https://th.bing.com/th/id/OIP.kP5zam0dgx1_QkQuv2wCHgHaFj?rs=1&pid=ImgDetMain' },
+            { nazwa: 'Fiat Multipla', opis: 'samochód osobowy typu minivan klasy kompaktowej produkowany przez włoską markę FIAT w latach 1998–2010.', cena: 200, obrazek: 'https://th.bing.com/th/id/R.a2538980e6eb6dffc545373cbc5eeb7b?rik=C6IXYJhtF5ccjw&riu=http%3a%2f%2fwww.carsbase.com%2fphoto%2fFiat-Multipla_mp21_pic_35082.jpg&ehk=iNo%2bf%2bpfMzsAIKc5zHvjXC%2bBQkwBW87%2be8282z%2fyVVc%3d&risl=&pid=ImgRaw&r=0' },
+            { nazwa: 'Mercedes-Benz klasy G', opis: ' samochód osobowo-terenowy, a następnie SUV klasy wyższej produkowany pod niemiecką marką Mercedes-Benz od 1979 roku.', cena: 200, obrazek: 'https://th.bing.com/th/id/OIP.7slBGsTX7bE4JmTKo9f4_wHaEK?rs=1&pid=ImgDetMain' },
+            { nazwa: 'Furgonetka z napisem "FREE CANDY"', opis: 'Całkowicie nie podejrzany pojazd z napisem darmowe cukierki. Porusza się on po mięscie i zaprasza dzieci do środka aby odebrały swoje cukierki', cena: 200, obrazek: 'https://media.boingboing.net/wp-content/uploads/2015/08/free-candy.jpg' },
+            { nazwa: 'Porshe 911 GT3 RS', opis: 'kolejny model typu 911. Pierwsza wersja GT3 wyszła w roku 1999. Wygląd zewnętrzny nie odbiega zbytnio od innych modeli. Model ten wyposażony jest w 6-cylindrowy silnik bokser o pojemności 3600 cm³.', cena: 200, obrazek: 'https://th.bing.com/th/id/OIP.lDdBK9YfdfPjc6CZvDprOQHaEo?rs=1&pid=ImgDetMain' }
+        ];
+        const legendarneKarty = [
+            { nazwa: 'Robert Lewandowski', opis: 'polski piłkarz, występujący na pozycji środkowego napastnika w hiszpańskim klubie FC Barcelona oraz w reprezentacji Polski, której jest kapitanem.', cena: 375, obrazek: 'https://www.bing.com/th?id=OIP.MO6o7Z13hGxeoCwLbiy-EgHaEv&w=202&h=200&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2' },
+            { nazwa: 'Kylian Mbappé', opis: 'francuski piłkarz kameruńsko-algierskiego pochodzenia, występujący na pozycji napastnika w hiszpańskim klubie Real Madryt oraz w reprezentacji Francji, której jest kapitanem.', cena: 375, obrazek: 'https://th.bing.com/th/id/OIP.8jKygDqUQ6ifBIsAoC0iTgHaE8?rs=1&pid=ImgDetMain' },
+            { nazwa: 'Cristiano Ronaldo', opis: ' portugalski piłkarz, występujący na pozycji napastnika w saudyjskim klubie Al-Nassr oraz w reprezentacji Portugalii, której jest kapitanem. Złoty medalista Mistrzostw Europy 2016, srebrny medalista Mistrzostw Europy 2004.', cena: 375, obrazek: 'https://th.bing.com/th?id=OSK.vAVgNtmxfd8YO0kEZHIT1A&w=224&h=200&c=7&rs=1&o=6&pid=SANGAM' },
+            { nazwa: 'Lamine Yamal', opis: 'hiszpański piłkarz pochodzenia marokańsko-gwinejskiego, występujący na pozycji napastnika w hiszpańskim klubie FC Barcelona oraz w reprezentacji Hiszpanii. Zwycięzca Mistrzostw Europy 2024. Zwycięzca Nagrody Kopa Trophy 2024.', cena: 375, obrazek: 'https://th.bing.com/th?id=OSK.sMZGrTyR6-kqn2Qtgaem11GDm4sqfu9Rytf3Tms93KU&w=224&h=200&c=7&rs=1&o=6&pid=SANGAM' }
+        ];
+        </pre>
+        <hr>
+        <p> Funkcja poniżej pobiera z localstorage wartosc wynik, jeżeli nie ma tam żadnej wartości przypisuje 0 następnie funkcja pokazuje ilość punktów</p>
+        <pre class="code-block">
+        function aktualizujPunkty() {
+            const punkty = localStorage.getItem('wynik') || 0;
+            document.querySelector('.punkty').textContent = `Twoje punkty: ${punkty}`;
+        }
+    </pre>
+    <hr>
+    <p>Funkcja poniżej pobiera dane o ekwipunku z localStorage, a jeśli nie ma żadnych danych, ustawia pustą tablicę. Następnie, dla każdej karty w ekwipunku, tworzy wygląd karty z obrazkiem, nazwą, opisem oraz przyciskiem który po kliknięciu pozwala nam  na sprzedanie karty. Każdy element jest dodawany do listy na stronie.</p>
+    <pre class="code-block">
+        function aktualizujEkwipunek() {
+            const ekwipunek = JSON.parse(localStorage.getItem('ekwipunek')) || [];
+            const lista = document.getElementById('listaEkwipunku');
+            lista.innerHTML = '';
+            ekwipunek.forEach((karta, index) =&gt; {
+                const div = document.createElement('div');
+                div.className = 'ekwipunek-item';
+                div.innerHTML = `
+                    &lt;img src="${karta.obrazek}" alt="${karta.nazwa}"&gt;
+                    &lt;h4&gt;${karta.nazwa}&lt;/h4&gt;
+                    &lt;p&gt;${karta.opis}&lt;/p&gt;
+                    &lt;button onclick="sprzedajKarte(${index}, ${karta.cena})"&gt;Sprzedaj (${karta.cena} pkt)&lt;/button&gt;
+                `;
+                lista.appendChild(div);
+            });
+        }
+    </pre>
+    <hr>
+    <p> w tej funkcji inicjalizuje zmienne </p>
+    <pre class="code-block">
+
+        function kupPaczke(cena, karty) {
+    let punkty = parseInt(localStorage.getItem('wynik')) || 0;
+    const animacjaGif = document.getElementById('animacjaGif');
+    const prezentacjaKarty = document.getElementById('prezentacjaKarty');
+    const prezentacjaObrazek = document.getElementById('prezentacjaObrazek');
+    const prezentacjaNazwa = document.getElementById('prezentacjaNazwa');
+    const prezentacjaOpis = document.getElementById('prezentacjaOpis');
+</pre>
+<hr>
+<p>Ten fragment kodu odpowiada za zakup paczki z kartami. Sprawdza, czy użytkownik ma wystarczającą ilość punktów, a następnie pokazuje animację, losuje kartę, pokazuje jej wygląd i szczegóły, a po chwili zapisuje ją w ekwipunku i aktualizuje punkty. Jeśli użytkownik nie ma wystarczającej ilości  punktów, wyświetla komunikat o ich braku.</p>
+<pre class="code-block">
+    if (punkty &gt;= cena) {
+        punkty -= cena;
+        localStorage.setItem('wynik', punkty);
+
+        animacjaGif.style.display = 'block';
+
+        setTimeout(() =&gt; {
+            animacjaGif.style.display = 'none';
+            const wylosowanaKarta = karty[Math.floor(Math.random() * karty.length)];
+            prezentacjaObrazek.src = wylosowanaKarta.obrazek;
+            prezentacjaNazwa.textContent = wylosowanaKarta.nazwa;
+            prezentacjaOpis.textContent = wylosowanaKarta.opis;
+            prezentacjaKarty.style.display = 'block';
+
+            setTimeout(() =&gt; {
+                prezentacjaKarty.style.display = 'none';
+                const ekwipunek = JSON.parse(localStorage.getItem('ekwipunek')) || [];
+                ekwipunek.push(wylosowanaKarta);
+                localStorage.setItem('ekwipunek', JSON.stringify(ekwipunek));
+                aktualizujPunkty();
+                aktualizujEkwipunek();
+            }, 3000); 
+        }, 2000); 
+    } else {
+        komunikat.textContent = 'Nie masz wystarczającej liczby punktów!';
+        komunikat.style.color = 'red';
+    }
+}
+</pre>
+<hr>
+    <p>funkcja ta umożliwia sprzedanie karty. Po kliknięciu guzika wywołuje się funkcja która usuwa kartę z ekwipunku, dodaje punkty za jej sprzedaż, a następnie aktualizuje ilość punktów i  stan ekwipunku</p>
+    <pre class="code-block">
+        function sprzedajKarte(index, cena) {
+            let punkty = parseInt(localStorage.getItem('wynik')) || 0;
+            const ekwipunek = JSON.parse(localStorage.getItem('ekwipunek')) || [];
+            ekwipunek.splice(index, 1);
+            localStorage.setItem('ekwipunek', JSON.stringify(ekwipunek));
+            localStorage.setItem('wynik', punkty + cena);
+            aktualizujPunkty();
+            aktualizujEkwipunek();
+        }
+
+        aktualizujPunkty();
+        aktualizujEkwipunek();
+    </pre>
+    <hr>
+</div>
+</div>
+
+    <div class="section">
+       
+    </div>
+    
+</body>
+</html>
